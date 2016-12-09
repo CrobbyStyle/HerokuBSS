@@ -24,13 +24,13 @@ class RepositorioController extends Controller
 	public function pushAlert(Request $request){
         $message= $request->input('chat_text');
 
-        /*$current = file_get_contents(app_path()."/bssStorage/datos.txt");
+        $current = file_get_contents(app_path()."/bssStorage/datos.txt");
         $current .= $message."\n";
-        file_put_contents(app_path()."/bssStorage/datos.txt", $current);*/
+        file_put_contents(app_path()."/bssStorage/datos.txt", $current);
 
 		event(new HelloPusherEvent($message));
 
-        /*error_reporting(-1);
+        error_reporting(-1);
         ini_set('display_errors', 'On');
  
         $firebase = new Firebase();
@@ -63,7 +63,7 @@ class RepositorioController extends Controller
             $response = $firebase->sendToTopic('global', $json);
             error_log("ENVIANDO");
             error_log(json_encode($json));
-        }*/
+        }
 
     }
 
