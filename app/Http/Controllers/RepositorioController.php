@@ -30,7 +30,7 @@ class RepositorioController extends Controller
 
 		event(new HelloPusherEvent($message));
 
-        error_reporting(-1);
+        /*error_reporting(-1);
         ini_set('display_errors', 'On');
  
         $firebase = new Firebase();
@@ -63,7 +63,7 @@ class RepositorioController extends Controller
             $response = $firebase->sendToTopic('global', $json);
             error_log("ENVIANDO");
             error_log(json_encode($json));
-        }
+        }*/
 
     }
 
