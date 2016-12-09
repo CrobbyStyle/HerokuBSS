@@ -24,9 +24,9 @@ class RepositorioController extends Controller
 	public function pushAlert(Request $request){
         $message= $request->input('chat_text');
 
-        $current = file_get_contents("../storage/app/bss-storage/datos.txt");
+        $current = file_get_contents(app_path()."/bssStorage/datos.txt");
         $current .= $message."\n";
-        file_put_contents("../storage/app/bss-storage/datos.txt", $current);
+        file_put_contents(app_path()."/bssStorage/datos.txt", $current);
 
 		event(new HelloPusherEvent($message));
 
@@ -64,7 +64,7 @@ class RepositorioController extends Controller
             error_log("ENVIANDO");
             error_log(json_encode($json));
         }
-        
+
     }
 
 }
