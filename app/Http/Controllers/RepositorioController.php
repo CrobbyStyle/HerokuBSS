@@ -124,7 +124,7 @@ class RepositorioController extends Controller
     }
 
     public function mostrarAdmin(){
-        $current = file_get_contents("/bssStorage/config.txt");
+        $current = file_get_contents("/app/bssStorage/config.txt");
         $listSubstr = explode(",", $current);
         $val1 = intval($listSubstr[0]);
         $val2 = intval($listSubstr[1]);
