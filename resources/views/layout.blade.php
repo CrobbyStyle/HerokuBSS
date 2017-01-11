@@ -9,7 +9,7 @@
         <script src="{{ asset('/js/jquery-ui.js') }}"></script>
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-		<!-- <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"> -->
+		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
         <link rel="stylesheet" href="{{ asset('/css/jquery-ui-slider-pips.css')}}">
         <script src="{{ asset('/js/jquery-ui-slider-pips.js')}}"></script>
         <style type="text/css">
