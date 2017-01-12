@@ -107,11 +107,11 @@ class RepositorioController extends Controller
                         $fields = array(
                                 'to' => "/topics/global",
                                 'data' => array(
-                                        "keyname" => "Hello"
+                                        "keyname" => "PusherEvent"
                                 ),
                                 'notification' => array(
-                                    'title' => 'hello',
-                                    'text' => 'this is text',
+                                    'title' => 'Breaktime Sensing System',
+                                    'text' => 'Take a break!',
                                 )
                         );
                         $fields = json_encode ( $fields );
@@ -190,11 +190,11 @@ class RepositorioController extends Controller
                         $fields = array(
                                 'to' => "/topics/global",
                                 'data' => array(
-                                        "keyname" => "Hello"
+                                        "keyname" => "PusherEvent"
                                 ),
                                 'notification' => array(
-                                    'title' => 'hello',
-                                    'text' => 'this is text',
+                                    'title' => 'Breaktime Sensing System',
+                                    'text' => 'Take a break!',
                                 )
                         );
                         $fields = json_encode ( $fields );
