@@ -12,9 +12,9 @@ use App\Events\HelloPusherEvent;
 use PushNotification;
 use App\bssConfig\firebase;
 use App\bssConfig\push;
-// use App\Lugar as Lugar;
-// use App\Vector as Vector;
-// use DB;
+use App\Lugar as Lugar;
+use App\Vector as Vector;
+use DB;
 use DateTime;
 
 class RepositorioController extends Controller
@@ -44,7 +44,6 @@ class RepositorioController extends Controller
         $val1 = intval($listSubstr[0]);
         $val2 = intval($listSubstr[1]);
         $val3 = intval($listSubstr[2]);
-        $val4 = intval($listSubstr[3]);
 
 
         try{
@@ -52,7 +51,6 @@ class RepositorioController extends Controller
                 "temperatura"=> $val1,
                 "humedad"=> $val2,
                 "ruido" => $val3,
-                "voz" => $val4,
                 "fecha" => $today,
                 "lugar_id" => 1
             ));
@@ -66,13 +64,11 @@ class RepositorioController extends Controller
         $valTemp = intval($listaValores[0]);
         $valHumi = intval($listaValores[1]);
         $valNois = intval($listaValores[2]);
-        $valVoic = intval($listaValores[3]);
-        $valClock = intval($listaValores[4]);
+        $valClock = intval($listaValores[3]);
 
         if($val1>$valTemp){
             if($val2>$valHumi){
                 if($val3>$valNois){
-                    if($val4>$valVoic){
                         // error_reporting(-1);
                         // ini_set('display_errors', 'On');
                  
@@ -132,7 +128,6 @@ class RepositorioController extends Controller
                         error_log($result);
                         curl_close ( $ch );
 
-                    }
 
                 }
 
@@ -156,35 +151,70 @@ class RepositorioController extends Controller
         $val1 = $request->valorTemp;
         $val2 = $request->valorHumi;
         $val3 = $request->valorNois;
-        $val4 = $request->valorVoic;
 
-        // try{
-        //     Vector::insert(array(
-        //         "temperatura"=> $val1,
-        //         "humedad"=> $val2,
-        //         "ruido" => $val3,
-        //         "voz" => $val4,
-        //         "fecha" => $today,
-        //         "lugar_id" => 1
-        //     ));
-        //     error_log("hola2");
+        try{
+            Vector::insert(array(
+                "temperatura"=> $val1,
+                "humedad"=> $val2,
+                "ruido" => $val3,
+                "fecha" => $today,
+                "lugar_id" => 1
+            ));
+            error_log("hola2");
 
-        // }catch (\Exception $e) {
-        //     error_log($e);
-        // }
+        }catch (\Exception $e) {
+            error_log($e);
+        }
 
         $configValues = file_get_contents(app_path()."/bssStorage/config.txt");
         $listaValores = explode(",", $configValues);
         $valTemp = intval($listaValores[0]);
         $valHumi = intval($listaValores[1]);
         $valNois = intval($listaValores[2]);
-        $valVoic = intval($listaValores[3]);
-        $valClock = intval($listaValores[4]);
+        $valClock = intval($listaValores[3]);
+
+        error_log("Valores del sensor");
+        error_log($val1);
+        error_log($val2);
+        error_log($val3);
+
+        error_log("Valores Limite");
+        error_log($valTemp);
+        error_log($valHumi);
+        error_log($valNois);
 
         if($val1>$valTemp){
             if($val2>$valHumi){
                 if($val3>$valNois){
-                    if($val4>$valVoic){
+                        // error_reporting(-1);
+                        // ini_set('display_errors', 'On');
+                 
+                        // $firebase = new Firebase();
+                        // $push = new Push();
+                  
+                        // $payload = array();
+                        // $payload['Message'] = 'Breaktime!';
+                        // //$payload['score'] = '9.9';
+                        // $title = 'BSS: Alerta de Prueba para materia integradora';
+                        // $message = 'Se aconseja tomar un receso';
+                        // $push_type = 'topic';
+                 
+                 
+                        // $push->setTitle($title);
+                        // $push->setMessage($message);
+                        // $push->setIsBackground(FALSE);
+                        // $push->setPayload($payload);
+                 
+                        // $json = '';
+                        // $response = '';
+                        // error_log("A ENVIAR PUSH");
+                        // if ($push_type == 'topic') {
+                        //     $json = $push->getPush();
+                        //     $response = $firebase->sendToTopic('global', $json);
+                        //     error_log("ENVIANDO");
+                        //     error_log(json_encode($json));
+                        // }
+
                         $url = 'https://fcm.googleapis.com/fcm/send';
 
                         $fields = array(
@@ -215,7 +245,7 @@ class RepositorioController extends Controller
                         error_log($result);
                         curl_close ( $ch );
 
-                    }
+                    
 
                 }
 
@@ -230,10 +260,9 @@ class RepositorioController extends Controller
         $valorTemp=$request->valorTemp;
         $valorHumi = $request->valorHumi;
         $valorNois=$request->valorNois;
-        $valorVoic = $request->valorVoic;
         $valorClock=$request->valorClock;
 
-        $message = $valorTemp.",".$valorHumi.",".$valorNois.",".$valorVoic.",".$valorClock. "\n";
+        $message = $valorTemp.",".$valorHumi.",".$valorNois.",".$valorClock. "\n";
         file_put_contents(app_path()."/bssStorage/config.txt", $message);
 
         error_log($message);
@@ -245,13 +274,11 @@ class RepositorioController extends Controller
         $val1 = intval($listSubstr[0]);
         $val2 = intval($listSubstr[1]);
         $val3 = intval($listSubstr[2]);
-        $val4 = intval($listSubstr[3]);
-        $val5 = intval($listSubstr[4]);
+        $val5 = intval($listSubstr[3]);
         $args = array(
                     'valTemp'=> $val1,
                     'valHumi'=> $val2,
                     'valNois'=> $val3,
-                    'valVoic'=> $val4,
                     'valClock'=> $val5,
                     );
 
